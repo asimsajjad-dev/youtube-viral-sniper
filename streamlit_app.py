@@ -40,10 +40,8 @@ if st.button("🚀 Hunt Viral Videos", type="primary"):
         st.stop()
 
     # === FIXED: Clean ISO 8601 format without microseconds ===
-    now_utc = datetime.now(timezone.utc)
-    start_datetime = now_utc - timedelta(days=days)
-    start_datetime = start_datetime.replace(microsecond=0)  # Remove microseconds for clean format
-    start_date = start_datetime.isoformat() + "Z"  # Ensures YYYY-MM-DDTHH:MM:SSZ format
+   start_date = (datetime.now(timezone.utc) - timedelta(days=days)).replace(microsecond=0).strftime("%Y-%m-%dT%H:%M:%SZ")
+    st.info(f"Searching videos after: `{start_date}`")
 
     # Debug: Show the exact parameter (remove after testing)
     st.info(f"🔍 Generated publishedAfter: `{start_date}` (last {days} days)")
